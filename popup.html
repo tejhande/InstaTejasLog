@@ -1,30 +1,41 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Instagram</title>
-    <link rel="stylesheet" href="styles/popup.css">
-    <link rel="icon" href="icons/icon16.png" type="image/png"> <!-- Favicon -->
-  </head>
-  <body>
-    <h1>Instagram Login</h1>
-    
-    <!-- Bio Section -->
-    <div id="bio-section">
-      <h2>About</h2>
-      <p>Developed By Tejas Hande.</p>
-      <p>tejashande.vercel.app</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Cookie Manager</title>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="icon" href="icons/icon16.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="icons/icon128.png" alt="Extension Icon" class="logo">
+            <h1>Instagram Cookie Manager</h1>
+        </header>
+        
+        <main>
+            <div class="input-group">
+                <input type="text" id="cookie-input" placeholder="Enter Cookie">
+                <button id="login_button" class="btn btn-primary">Login</button>
+                <button id="logout_button" class="btn btn-secondary" style="display: none;">Logout</button>
+            </div>
+            <div id="loading_data" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <span>Loading...</span>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="bio">
+                <h2>About</h2>
+                <p>Developed by Tejas Hande</p>
+                <a href="https://tejashande.vercel.app" target="_blank" class="btn btn-link">Portfolio</a>
+            </div>
+        </footer>
     </div>
-
-    <input type="text" id="cookie-input" placeholder="Enter Cookie">
-    <button id="login_button">Login</button>
-    <button id="logout_button" style="display:none;">Logout</button>
-    <div id="loading_data" style="display:none;">Loading...</div>
     
-    <!-- Icon Image -->
-    <div class="icon-container">
-      <img src="icons/icon128.png" alt="Extension Icon" width="128" height="128">
-    </div>
-
     <script src="popup.js"></script>
-  </body>
+</body>
 </html>
