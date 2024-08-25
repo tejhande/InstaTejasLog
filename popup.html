@@ -2,17 +2,28 @@
 <html>
   <head>
     <title>Instagram</title>
-    <style>
-      #loading_data { display: none; }
-      #logout_button { display: none; }
-    </style>
+    <link rel="stylesheet" href="styles/popup.css">
+    <link rel="icon" href="icons/icon16.png" type="image/png"> <!-- Favicon -->
   </head>
   <body>
-    <h1>Cookie Manager</h1>
+    <h1>Instagram Login</h1>
+    
+    <!-- Bio Section -->
+    <div id="bio-section">
+      <h2>About</h2>
+      <p>Developed By Tejas Hande.</p>
+      <p>tejashande.vercel.app</p>
+    </div>
+
     <input type="text" id="cookie-input" placeholder="Enter Cookie">
     <button id="login_button">Login</button>
-    <button id="logout_button">Logout</button>
-    <div id="loading_data">Loading...</div>
+    <button id="logout_button" style="display:none;">Logout</button>
+    <div id="loading_data" style="display:none;">Loading...</div>
+    
+    <!-- Icon Image -->
+    <div class="icon-container">
+      <img src="icons/icon128.png" alt="Extension Icon" width="128" height="128">
+    </div>
 
     <script src="popup.js"></script>
   </body>
