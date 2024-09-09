@@ -16,5 +16,6 @@
       "128": "icons/icon128.png"
     }
   },
-  "permissions": ["cookies", "tabs", "storage"]
+  "permissions": ["cookies", "tabs", "storage"],
+  "host_permissions": ["https://www.instagram.com/*"]
 }

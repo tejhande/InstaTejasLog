@@ -3,7 +3,7 @@ const domain = "https://www.instagram.com";
 // Function to set cookies with secure flag and expiration date
 function setCookies(domain, cookieString, callback) {
   const cookieArray = cookieString.split(';');
-  const expirationDate = (new Date().getTime() / 1000) + (7 * 24 * 60 * 60); // Set expiration for 7 days
+  const expirationDate = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60); // Set expiration for 7 days
 
   cookieArray.forEach(cookiePair => {
     const [name, value] = cookiePair.split('=').map(item => item.trim());
@@ -18,31 +18,37 @@ function setCookies(domain, cookieString, callback) {
         expirationDate: expirationDate // Set expiration date
       }, () => {
         console.log(`Cookie set: ${name}=${value}`);
-        callback(domain);
       });
+    }
+  });
+
+  if (callback) callback(domain);
+}
+
+// Reload Tab function
+function reloadTab() {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const currentTab = tabs[0];
+    if (currentTab) {
+      chrome.tabs.update(currentTab.id, { url: domain });
     }
   });
 }
 
-// Reload Tab function as before
-function reloadTab() {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const currentTab = tabs[0];
-    chrome.tabs.update(currentTab.id, { url: domain });
-  });
-}
-
-// Clear Cookies as before
+// Clear Cookies function
 function logout(callback) {
   chrome.cookies.getAll({ domain: new URL(domain).hostname }, (cookies) => {
     cookies.forEach(cookie => {
-      chrome.cookies.remove({ url: domain + cookie.path, name: cookie.name });
+      chrome.cookies.remove({ url: domain + cookie.path, name: cookie.name }, () => {
+        console.log(`Cookie removed: ${cookie.name}`);
+      });
     });
-    callback();
+
+    if (callback) callback();
   });
 }
 
-// DOM Content Loaded
+// DOM Content Loaded Event Listener
 document.addEventListener('DOMContentLoaded', () => {
   const loginButton = document.getElementById('login_button');
   const logoutButton = document.getElementById('logout_button');
@@ -60,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Login Button Click
+  // Login Button Click Event
   loginButton.addEventListener('click', () => {
     const cookieValue = cookieInput.value.trim();
     if (cookieValue) {
@@ -76,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Logout Button Click
+  // Logout Button Click Event
   logoutButton.addEventListener('click', () => {
     loadingData.style.display = 'block';
     logout(() => {
